@@ -189,6 +189,236 @@
   flex: 1;
 }
 
+/* ═══════════════════════════════════════════
+   FILTER BAR — Search & Category Pills
+   ═══════════════════════════════════════════ */
+
+/* --- Filter Bar Container --- */
+.filter-bar {
+  background: rgba(28, 12, 6, 0.92);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid rgba(232, 184, 75, 0.1);
+  padding: 1.2rem 3rem;
+  position: sticky;
+  top: 54px;
+  z-index: 90;
+}
+
+.filter-bar--light {
+  background: rgba(253, 246, 227, 0.95);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  border-bottom: 1px solid rgba(44, 24, 16, 0.08);
+}
+
+.filter-bar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* --- Search Input --- */
+.filter-search-wrap {
+  position: relative;
+  flex: 0 0 260px;
+}
+
+.filter-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.filter-search {
+  width: 100%;
+  padding: 0.7rem 1rem 0.7rem 2.5rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(232, 184, 75, 0.2);
+  border-radius: 40px;
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  outline: none;
+  transition: all 0.35s ease;
+}
+
+.filter-search::placeholder {
+  color: rgba(253, 246, 227, 0.4);
+}
+
+.filter-search:focus {
+  border-color: rgba(232, 184, 75, 0.5);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 20px rgba(232, 184, 75, 0.1);
+}
+
+/* Light variant search */
+.filter-bar--light .filter-search {
+  background: rgba(44, 24, 16, 0.04);
+  border-color: rgba(44, 24, 16, 0.12);
+  color: var(--dark-earth);
+}
+
+.filter-bar--light .filter-search::placeholder {
+  color: rgba(44, 24, 16, 0.35);
+}
+
+.filter-bar--light .filter-search:focus {
+  border-color: rgba(192, 57, 43, 0.4);
+  background: rgba(44, 24, 16, 0.06);
+  box-shadow: 0 0 20px rgba(192, 57, 43, 0.06);
+}
+
+/* --- Filter Pills --- */
+.filter-pills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.filter-pill {
+  padding: 0.5rem 1.1rem;
+  background: transparent;
+  border: 1px solid rgba(232, 184, 75, 0.2);
+  border-radius: 30px;
+  color: rgba(253, 246, 227, 0.6);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  white-space: nowrap;
+}
+
+.filter-pill:hover {
+  border-color: rgba(232, 184, 75, 0.5);
+  color: var(--cream);
+  background: rgba(232, 184, 75, 0.08);
+}
+
+.filter-pill.active {
+  background: rgba(232, 184, 75, 0.15);
+  border-color: var(--warm-gold);
+  color: var(--warm-gold);
+  box-shadow: 0 2px 12px rgba(232, 184, 75, 0.15);
+}
+
+/* Light variant pills */
+.filter-bar--light .filter-pill {
+  border-color: rgba(44, 24, 16, 0.12);
+  color: var(--text-light);
+}
+
+.filter-bar--light .filter-pill:hover {
+  border-color: rgba(192, 57, 43, 0.35);
+  color: var(--dark-earth);
+  background: rgba(192, 57, 43, 0.04);
+}
+
+.filter-bar--light .filter-pill.active {
+  background: rgba(192, 57, 43, 0.08);
+  border-color: var(--crimson);
+  color: var(--crimson);
+  box-shadow: 0 2px 12px rgba(192, 57, 43, 0.1);
+}
+
+/* --- Result Count --- */
+.filter-result-count {
+  font-size: 0.72rem;
+  color: rgba(253, 246, 227, 0.35);
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.filter-result-count.filtered {
+  color: var(--warm-gold);
+}
+
+.filter-bar--light .filter-result-count {
+  color: var(--text-light);
+  opacity: 0.6;
+}
+
+.filter-bar--light .filter-result-count.filtered {
+  color: var(--crimson);
+  opacity: 1;
+}
+
+/* --- Card Filtering Transitions --- */
+.sub-card {
+  transition: all 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              opacity 0.35s ease,
+              transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sub-card.filter-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.sub-card.filter-hidden {
+  opacity: 0;
+  transform: translateY(15px) scale(0.95);
+  pointer-events: none;
+  position: absolute;
+  visibility: hidden;
+}
+
+/* Grid needs relative for absolute hidden cards */
+.sub-grid {
+  position: relative;
+}
+
+/* --- No Results State --- */
+.no-results {
+  display: none;
+  text-align: center;
+  padding: 4rem 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.no-results.visible {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.no-results-icon {
+  font-size: 3.5rem;
+  display: block;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.no-results h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: var(--dark-earth);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.no-results p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
 /* --- Responsive --- */
 @media (max-width: 900px) {
   .sub-grid {
@@ -203,6 +433,15 @@
   .sub-main {
     padding: 3rem 1.5rem 5rem;
   }
+  .filter-bar {
+    padding: 1rem 1.5rem;
+  }
+  .filter-bar-inner {
+    gap: 1rem;
+  }
+  .filter-search-wrap {
+    flex: 1 1 100%;
+  }
 }
 
 @media (max-width: 600px) {
@@ -216,5 +455,16 @@
   .sub-hero {
     min-height: 300px;
     background-attachment: scroll;
+  }
+  .filter-pills {
+    gap: 0.4rem;
+  }
+  .filter-pill {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.7rem;
+  }
+  .filter-result-count {
+    width: 100%;
+    text-align: center;
   }
 }

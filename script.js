@@ -68,7 +68,8 @@
     '.dest-card.reveal',
     '.spi-card.reveal',
     '.wildlife-card.reveal',
-    '.gi-card.reveal'
+    '.gi-card.reveal',
+    '.heritage-card.reveal'
   ];
 
   cardSelectors.forEach(selector => {
@@ -120,7 +121,7 @@
     const visibleCards = document.querySelectorAll(
       '.dest-card.reveal.visible, .cuisine-card.reveal.visible, ' +
       '.spi-card.reveal.visible, .wildlife-card.reveal.visible, ' +
-      '.gi-card.reveal.visible'
+      '.gi-card.reveal.visible, .heritage-card.reveal.visible'
     );
 
     visibleCards.forEach((card, i) => {

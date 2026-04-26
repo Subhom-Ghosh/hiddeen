@@ -925,6 +925,150 @@ section {
 }
 
 /* ═══════════════════════════════
+     HIDDEN GEMS — Bento Grid
+  ═══════════════════════════════ */
+#hidden-gems {
+  padding: 7rem 3rem 6rem;
+  background: linear-gradient(to bottom, var(--cream) 0%, var(--dark-earth) 100%);
+  color: var(--text-dark);
+  position: relative;
+}
+
+#hidden-gems .section-title {
+  color: var(--dark-earth);
+}
+
+#hidden-gems .section-title em {
+  color: var(--crimson);
+}
+
+#hidden-gems .section-subtitle {
+  color: var(--text-light);
+}
+
+#hidden-gems .section-eyebrow {
+  color: var(--crimson);
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 280px;
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.bento-item {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.bento-large { grid-column: span 2; grid-row: span 2; }
+.bento-wide { grid-column: span 2; grid-row: span 1; }
+.bento-tall { grid-column: span 1; grid-row: span 2; }
+.bento-small { grid-column: span 1; grid-row: span 1; }
+
+.bento-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.5s ease;
+  filter: brightness(0.7) saturate(1.1);
+}
+
+.bento-item:hover .bento-img {
+  transform: scale(1.08);
+  filter: brightness(0.5) saturate(1.3);
+}
+
+.bento-content {
+  position: absolute;
+  inset: 0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%);
+  transition: opacity 0.5s ease;
+}
+
+.bento-badge {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 0.4rem 1rem;
+  border-radius: 30px;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.bento-content h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+  transform: translateY(15px);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.bento-content p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition-delay: 0.05s;
+  line-height: 1.5;
+}
+
+.bento-item:hover .bento-content h3 {
+  transform: translateY(0);
+}
+
+.bento-item:hover .bento-content p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 900px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 240px;
+  }
+  .bento-large, .bento-wide { grid-column: span 2; }
+  .bento-tall, .bento-small { grid-column: span 1; }
+  .bento-content p {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .bento-content h3 {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 260px;
+  }
+  .bento-large, .bento-wide, .bento-tall, .bento-small {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+}
+
+/* ═══════════════════════════════
      CUISINE — Infinite Marquee
   ═══════════════════════════════ */
 #cuisine {
@@ -1284,10 +1428,11 @@ section {
 .spi-card {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(212, 160, 23, 0.18);
-  border-radius: 4px;
-  padding: 2rem 1.5rem;
+  border-radius: 8px;
+  padding: 0;
   transition: all 0.4s;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .spi-card:hover {
@@ -1296,10 +1441,43 @@ section {
   transform: translateY(-4px);
 }
 
+/* --- Spiritual Card Image --- */
+.spi-card-img {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  position: relative;
+}
+
+.spi-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.75) saturate(1.1);
+  transition: transform 0.6s ease, filter 0.4s ease;
+}
+
+.spi-card:hover .spi-card-img img {
+  transform: scale(1.1);
+  filter: brightness(0.6) saturate(1.3);
+}
+
+.spi-card-img::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(28, 12, 6, 0.95), transparent);
+  pointer-events: none;
+}
+
 .spi-icon {
   font-size: 2.2rem;
   margin-bottom: 1rem;
   display: block;
+  padding: 0 1.5rem;
 }
 
 .spi-card h3 {
@@ -1307,12 +1485,14 @@ section {
   font-size: 1.2rem;
   color: var(--cream);
   margin-bottom: 0.5rem;
+  padding: 0.8rem 1.5rem 0;
 }
 
 .spi-card p {
   font-size: 0.84rem;
   color: rgba(253, 246, 227, 0.6);
   line-height: 1.65;
+  padding: 0 1.5rem 1.5rem;
 }
 
 /* ═══════════════════════════════
@@ -1638,6 +1818,181 @@ video::-webkit-media-controls-start-playback-button {
   letter-spacing: 0.1em;
 }
 
+/* --- GI Card Image --- */
+.gi-card-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 0.8rem;
+  border: 2px solid rgba(212, 160, 23, 0.3);
+  transition: border-color 0.4s ease, transform 0.4s ease;
+}
+
+.gi-card:hover .gi-card-img {
+  border-color: var(--warm-gold);
+  transform: scale(1.08);
+}
+
+.gi-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.85) saturate(1.2);
+  transition: filter 0.4s ease;
+}
+
+.gi-card:hover .gi-card-img img {
+  filter: brightness(1) saturate(1.3);
+}
+
+/* ═══════════════════════════════
+     HIDDEN HERITAGE SITES
+   ═══════════════════════════════ */
+#hidden-heritage {
+  padding: 7rem 3rem 6rem;
+  background: linear-gradient(180deg, #1A0E08 0%, #2C1810 40%, #1A0E08 100%);
+  color: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+
+#hidden-heritage::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(212, 160, 23, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(192, 57, 43, 0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+#hidden-heritage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4A017' fill-opacity='0.02'%3E%3Cpath d='M40 0L50 30H30L40 0zM40 80L30 50H50L40 80zM0 40L30 30V50L0 40zM80 40L50 50V30L80 40z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+#hidden-heritage .section-title {
+  color: var(--cream);
+}
+
+#hidden-heritage .section-title em {
+  color: var(--warm-gold);
+}
+
+#hidden-heritage .section-eyebrow {
+  color: var(--warm-gold);
+}
+
+#hidden-heritage .section-subtitle {
+  color: rgba(253, 246, 227, 0.6);
+}
+
+.heritage-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.heritage-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(212, 160, 23, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.heritage-card:hover {
+  background: rgba(212, 160, 23, 0.06);
+  border-color: rgba(212, 160, 23, 0.4);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3),
+              0 0 0 1px rgba(212, 160, 23, 0.15);
+}
+
+.heritage-card-img {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.heritage-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7) saturate(1.15);
+  transition: transform 0.7s ease, filter 0.5s ease;
+}
+
+.heritage-card:hover .heritage-card-img img {
+  transform: scale(1.08);
+  filter: brightness(0.55) saturate(1.3);
+}
+
+.heritage-card-img::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(26, 14, 8, 1), transparent);
+  pointer-events: none;
+}
+
+.heritage-location {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(28, 12, 6, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--warm-gold);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  padding: 0.35rem 0.8rem;
+  border-radius: 20px;
+  border: 1px solid rgba(212, 160, 23, 0.2);
+  z-index: 2;
+}
+
+.heritage-card-body {
+  padding: 1.5rem;
+}
+
+.heritage-card-body h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--cream);
+  margin-bottom: 0.4rem;
+  line-height: 1.25;
+}
+
+.heritage-why {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--warm-gold);
+  margin-bottom: 0.8rem !important;
+  opacity: 0.85;
+}
+
+.heritage-card-body p {
+  font-size: 0.85rem;
+  color: rgba(253, 246, 227, 0.55);
+  line-height: 1.7;
+}
+
 /* ═══════════════════════════════
      FOOTER
   ═══════════════════════════════ */
@@ -1839,7 +2194,8 @@ footer {
 .cuisine-card.reveal.visible,
 .spi-card.reveal.visible,
 .wildlife-card.reveal.visible,
-.gi-card.reveal.visible {
+.gi-card.reveal.visible,
+.heritage-card.reveal.visible {
   animation: floatIdle 6s ease-in-out infinite;
   animation-delay: calc(var(--float-seed, 0) * 1s);
 }
@@ -1849,7 +2205,8 @@ footer {
 .cuisine-card.reveal.visible:nth-child(even),
 .spi-card.reveal.visible:nth-child(even),
 .wildlife-card.reveal.visible:nth-child(even),
-.gi-card.reveal.visible:nth-child(even) {
+.gi-card.reveal.visible:nth-child(even),
+.heritage-card.reveal.visible:nth-child(even) {
   animation-name: floatIdleAlt;
   animation-duration: 7s;
 }
@@ -1943,7 +2300,8 @@ footer {
 
 /* --- Shimmer highlight on cards when they first appear --- */
 .dest-card.reveal.visible::after,
-.gi-card.reveal.visible::after {
+.gi-card.reveal.visible::after,
+.heritage-card.reveal.visible::after {
   content: '';
   position: absolute;
   top: 0;
@@ -1968,7 +2326,8 @@ footer {
 .dest-card.reveal.visible:hover,
 .cuisine-card.reveal.visible:hover,
 .spi-card.reveal.visible:hover,
-.gi-card.reveal.visible:hover {
+.gi-card.reveal.visible:hover,
+.heritage-card.reveal.visible:hover {
   animation-play-state: paused;
 }
 
@@ -1987,7 +2346,8 @@ footer {
   }
 
   .dest-card.reveal.visible::after,
-  .gi-card.reveal.visible::after {
+  .gi-card.reveal.visible::after,
+  .heritage-card.reveal.visible::after {
     animation: none !important;
   }
 }
@@ -2003,8 +2363,15 @@ footer {
   #spiritual,
   #wildlife,
   #culture,
-  #gi-tags {
+  #gi-tags,
+  #hidden-heritage {
     padding: 5rem 1.5rem 4rem;
+  }
+
+  .heritage-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
   }
 
 
@@ -2051,7 +2418,8 @@ footer {
 
   .dest-grid,
   .wildlife-grid,
-  .gi-grid {
+  .gi-grid,
+  .heritage-grid {
     grid-template-columns: 1fr;
   }
 }
